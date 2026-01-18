@@ -1,5 +1,5 @@
 plugins {
-	id 'fabric-loom' version '1.11-SNAPSHOT'
+	id 'fabric-loom' version '1.13-SNAPSHOT'
 	id "com.modrinth.minotaur" version "2.+"
 	id "com.matthewprenger.cursegradle" version "1.4.0"
 }
@@ -14,7 +14,7 @@ repositories {
 }
 
 ext.Versions = new Properties()
-Versions.load(file("Versionfiles/mcversion-1.21.9.properties").newReader())
+Versions.load(file("Versionfiles/mcversion-1.21.11.properties").newReader())
 
 ext.projectVersion = "4.0.0"
 
@@ -36,7 +36,9 @@ dependencies {
     minecraft  "com.mojang:minecraft:${Versions['minecraft_version']}"
     mappings   "net.fabricmc:yarn:${Versions['yarn_mappings']}:v2"
     modImplementation "net.fabricmc:fabric-loader:${Versions['loader_version']}"
-    modImplementation "net.fabricmc.fabric-api:fabric-api:${Versions['fabric_version']}"
+    modImplementation("net.fabricmc.fabric-api:fabric-api:${Versions['fabric_version']}") {
+        exclude module: "fabric-content-registries-v0"
+    }
 }
 
 java {
